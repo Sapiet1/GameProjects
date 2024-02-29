@@ -1,0 +1,15 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.1
+
+[libraries]
+linux.debug.x86_64     = "res://../topdown/target/debug/libtopdown.so"
+linux.release.x86_64   = "res://../topdown/target/release/libtopdown.so"
+windows.debug.x86_64   = "res://../topdown/target/debug/topdown.dll"
+windows.release.x86_64 = "res://../topdown/target/release/topdown.dll"
+macos.debug            = "res://../topdown/target/debug/libtopdown.dylib"
+macos.release          = "res://../topdown/target/release/libtopdown.dylib"
+macos.debug.arm64      = "res://../topdown/target/debug/libtopdown.dylib"
+macos.release.arm64    = "res://../topdown/target/release/libtopdown.dylib"
+web.debug.wasm32       = "res://../topdown/target/wasm32-unknown-emscripten/debug/topdown.wasm"
+web.release.wasm32     = "res://../topdown/target/wasm32-unknown-emscripten/release/topdown.wasm"

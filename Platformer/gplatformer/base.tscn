@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://dljwcs45ute45"]
+
+[ext_resource type="Texture2D" uid="uid://cc32mi5wr23if" path="res://assets/background.png" id="1_awr4f"]
+[ext_resource type="Script" path="res://BackgroundArea.gd" id="1_lgn6x"]
+[ext_resource type="AudioStream" uid="uid://boum423m8f4el" path="res://assets/jump.mp3" id="2_skt4u"]
+[ext_resource type="Texture2D" uid="uid://pd4sp60uob5i" path="res://assets/alienBeige_stand.png" id="2_u4xug"]
+[ext_resource type="Texture2D" uid="uid://c1444mp065uo4" path="res://assets/alienBeige_jump.png" id="3_ietqy"]
+[ext_resource type="Script" path="res://Coin.gd" id="3_kguov"]
+[ext_resource type="Texture2D" uid="uid://dqknqch1w2svx" path="res://icon.svg" id="3_kkcpb"]
+[ext_resource type="Texture2D" uid="uid://4888143hgxn5" path="res://assets/alienBeige_walk1.png" id="4_ge607"]
+[ext_resource type="Texture2D" uid="uid://cn303h4i6kwdu" path="res://assets/alienBeige_walk2.png" id="5_pr77m"]
+[ext_resource type="Texture2D" uid="uid://dth0f3v8mt6yo" path="res://assets/alienBeige_badge2.png" id="9_6u8wd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wfaa"]
+size = Vector2(8328, 4121.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7nss"]
+size = Vector2(336, 286)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvebn"]
+radius = 24.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_73yet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ietqy")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u4xug")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ge607")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pr77m")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2bvn"]
+radius = 32.0
+height = 96.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="BackgroundArea" type="Area2D" parent="."]
+script = ExtResource("1_lgn6x")
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundArea"]
+position = Vector2(4160, 2056)
+scale = Vector2(5, 5)
+texture = ExtResource("1_awr4f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundArea"]
+position = Vector2(4164, 2059.25)
+shape = SubResource("RectangleShape2D_1wfaa")
+debug_color = Color(0.996078, 0, 0.180392, 0.419608)
+
+[node name="StartPlatform" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPlatform"]
+position = Vector2(512, 512)
+scale = Vector2(1.9, 0.45)
+shape = SubResource("RectangleShape2D_y7nss")
+
+[node name="Sprite2D" type="Sprite2D" parent="StartPlatform"]
+position = Vector2(512, 512)
+scale = Vector2(5, 1)
+texture = ExtResource("3_kkcpb")
+
+[node name="MoonPlatform" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoonPlatform"]
+position = Vector2(1912, 703.5)
+scale = Vector2(1.9, 0.45)
+shape = SubResource("RectangleShape2D_y7nss")
+
+[node name="Sprite2D" type="Sprite2D" parent="MoonPlatform"]
+position = Vector2(1912, 703.5)
+scale = Vector2(5, 1)
+texture = ExtResource("3_kkcpb")
+
+[node name="Coin" type="Coin" parent="."]
+script = ExtResource("3_kguov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin"]
+position = Vector2(1919.5, 607)
+shape = SubResource("CircleShape2D_nvebn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Coin"]
+position = Vector2(1920, 607.5)
+texture = ExtResource("9_6u8wd")
+
+[node name="Player" type="Player" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("2_skt4u")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+anchor_mode = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(512, 392)
+sprite_frames = SubResource("SpriteFrames_73yet")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(512, 392)
+shape = SubResource("CapsuleShape2D_r2bvn")
+
+[connection signal="body_exited" from="BackgroundArea" to="BackgroundArea" method="_on_body_exited"]
+[connection signal="body_exited" from="BackgroundArea" to="Player" method="_on_background_area_body_exited"]
+[connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
