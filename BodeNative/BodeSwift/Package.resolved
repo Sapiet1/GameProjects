@@ -1,0 +1,24 @@
+{
+  "originHash" : "5627384ce2ed2a46116468ca0b6f72d17b018822717197ae7d5cd0eed6e385e8",
+  "pins" : [
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax",
+      "state" : {
+        "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
+        "version" : "510.0.1"
+      }
+    },
+    {
+      "identity" : "swiftgodot",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/migueldeicaza/SwiftGodot",
+      "state" : {
+        "branch" : "main",
+        "revision" : "cf27083e9c76564947d0e9e347d3feaf639eea55"
+      }
+    }
+  ],
+  "version" : 3
+}

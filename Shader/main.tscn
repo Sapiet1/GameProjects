@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccr17v2da3rt8"]
+
+[ext_resource type="Shader" path="res://main.gdshader" id="1_o7egm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxv12"]
+render_priority = 0
+shader = ExtResource("1_o7egm")
+
+[sub_resource type="SphereMesh" id="SphereMesh_qibaq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_lxv12")
+mesh = SubResource("SphereMesh_qibaq")

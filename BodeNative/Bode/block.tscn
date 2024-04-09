@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk7tf7t3u8j0v"]
+
+[ext_resource type="Script" path="res://block.gd" id="1_5467d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qwid"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3j2tv"]
+albedo_color = Color(1, 0.501961, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ivby6"]
+material = SubResource("StandardMaterial3D_3j2tv")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jpuhq"]
+radius = 10.0
+
+[node name="Block" type="RigidBody3D"]
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("1_5467d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_5qwid")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ivby6")
+
+[node name="Despawn" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Despawn"]
+shape = SubResource("SphereShape3D_jpuhq")
