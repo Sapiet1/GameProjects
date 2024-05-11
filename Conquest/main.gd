@@ -181,9 +181,9 @@ func is_subset(subset, superset):
 
 func boolean(value):
 	if value == "true":
-		true
+		return true
 	elif value == "false":
-		false
+		return false
 
 
 func _on_get_players_request_completed(result, response_code, headers, body):
