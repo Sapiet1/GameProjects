@@ -1,0 +1,162 @@
+[gd_scene load_steps=7 format=3 uid="uid://p65hb5360syg"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_fvlvu"]
+[ext_resource type="Script" path="res://warning.gd" id="2_uslrf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bdq7m"]
+bg_color = Color(0.25098, 0.768627, 0.376471, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_an44i"]
+bg_color = Color(0.313726, 0.831373, 0.439216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v42e3"]
+bg_color = Color(0.12549, 0.643137, 0.25098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a46bs"]
+bg_color = Color(0.0627451, 0.517647, 0.12549, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fvlvu")
+
+[node name="Background" type="ColorRect" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -200.0
+offset_right = 175.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.0
+offset_top = -200.0
+offset_right = 175.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Background/Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.768627, 0.376471, 1)
+theme_override_font_sizes/font_size = 24
+text = "Conquest"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="LineEdit" parent="Background/Container"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 18
+placeholder_text = "Enter Name"
+alignment = 1
+caret_blink = true
+
+[node name="Play" type="Button" parent="Background/Container"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_bdq7m")
+theme_override_styles/hover = SubResource("StyleBoxFlat_an44i")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v42e3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_a46bs")
+disabled = true
+text = "Play!"
+clip_text = true
+
+[node name="Connect" type="HTTPRequest" parent="."]
+
+[node name="Exists" type="HTTPRequest" parent="."]
+
+[node name="Warning" type="Window" parent="."]
+title = "Warning"
+initial_position = 1
+size = Vector2i(400, 80)
+visible = false
+script = ExtResource("2_uslrf")
+
+[node name="Contents" type="Control" parent="Warning"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -40.0
+offset_right = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Warning/Contents"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 380.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="Warning/Contents/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Text" type="Label" parent="Warning/Contents/Background/Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.25098, 0.768627, 0.376471, 1)
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="text_submitted" from="Background/Container/Name" to="." method="_on_name_text_submitted"]
+[connection signal="pressed" from="Background/Container/Play" to="." method="_on_play_pressed"]
+[connection signal="request_completed" from="Connect" to="." method="_on_connect_request_completed"]
+[connection signal="request_completed" from="Exists" to="." method="_on_exists_request_completed"]
+[connection signal="close_requested" from="Warning" to="Warning" method="_on_close_requested"]
