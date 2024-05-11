@@ -55,7 +55,7 @@ func _input(event):
 		
 		for id in players:
 			if click_end in players[id]["territory"]:
-				player_owner = players[id]["name"]
+				player_owner = players[id]
 				break
 		
 		main_square_info.change_square(click_end, player_owner, click_start, players[Globals.unique_id])
@@ -226,8 +226,10 @@ func _on_attack_pressed():
 		main_square_info.destination.y,
 		main_square_info.source.x,
 		main_square_info.source.y,
-		main_square_info.split_source()])
+		main_square_info.split_source])
+	await server_set_turn.request_completed
 
 
 func _on_turns_timer_timeout():
 	server_get_turns.request("%s/get_turns?nonce=%s&unique_id=%s"%[Globals.URL, Globals.nonce, Globals.unique_id])
+	await server_get_turns.request_completed

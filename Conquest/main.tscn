@@ -1017,6 +1017,7 @@ autostart = true
 
 [node name="GetPlayers" type="HTTPRequest" parent="."]
 
+[connection signal="toggled" from="Camera/SquareInfo/Background/Container/Split" to="Camera/SquareInfo" method="_on_split_toggled"]
 [connection signal="pressed" from="Camera/SquareInfo/Background/Container/Attack" to="." method="_on_attack_pressed"]
 [connection signal="timeout" from="TurnsTimer" to="." method="_on_turns_timer_timeout"]
 [connection signal="request_completed" from="GetTurns" to="." method="_on_get_turns_request_completed"]

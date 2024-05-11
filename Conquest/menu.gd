@@ -47,7 +47,6 @@ func _on_connect_request_completed(result, response_code, headers, body):
 	
 	if error == OK:
 		auth.store_string(JSON.stringify(json.data))
-		var main_node = main.instantiate()
 		Globals.unique_id = json.data["unique_id"]
 		Globals.nonce = json.data["nonce"]
 		get_tree().change_scene_to_packed(main)
@@ -58,7 +57,6 @@ func _on_connect_request_completed(result, response_code, headers, body):
 func _on_exists_request_completed(result, response_code, headers, body):
 	var data = body.get_string_from_utf8()
 	if data == "true":
-		var main_node = main.instantiate()
 		Globals.unique_id = unique_id
 		Globals.nonce = nonce
 		get_tree().change_scene_to_packed(main)
