@@ -233,5 +233,8 @@ func _on_attack_pressed():
 
 
 func _on_turns_timer_timeout():
+	# Check if we are in mid-processing. If we are, `await` it. Remove the `await`s after.
+	# Do this for every single similar instance except for in `_ready` or for when
+	# we need side-effects to occur.
 	server_get_turns.request("%s/get_turns?nonce=%s&unique_id=%s"%[Globals.URL, Globals.nonce, Globals.unique_id])
 	await server_get_turns.request_completed
