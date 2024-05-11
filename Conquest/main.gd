@@ -62,6 +62,8 @@ func _input(event):
 		main_square_info.visible = true
 	elif event is InputEventKey and event.is_released() and event.keycode == KEY_ESCAPE:
 		main_square_info.visible = false
+	elif event is InputEventMouseButton and event.is_released() and event.button_index == MOUSE_BUTTON_RIGHT:
+		main_square_info.visible = false
 	elif event is InputEventKey and event.is_released() and event.keycode == KEY_B:
 		move_to_position()
 	elif event is InputEventKey and event.is_released() and event.keycode == KEY_M:
